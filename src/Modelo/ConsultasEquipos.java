@@ -53,7 +53,7 @@ public class ConsultasEquipos extends Conexion {
         }
     } 
     
-    public boolean eliminar(Equipos pro) {
+    public boolean eliminar (Equipos pro) {
         PreparedStatement ps = null;
         Connection con = (Connection) getConexion();
         String sql = "INSERT INTO Equipos (ID, Nombre, Ciudad) VALUES (?, ?, ?)";
