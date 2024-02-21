@@ -36,7 +36,7 @@
       <table id="carreras" class="table table-bordered table-striped">
         <thead>
           <tr>
-            <th>Codigo Carrera</th>
+            <th>Codigo</th>
             <th>Nombre Carrera</th>
             <th>Descripcion Carrera</th>
             <th>Valor Total</th>
@@ -59,9 +59,6 @@
           <div class="modal-body">
             <form method="post" id="formulario">
               <div class="modal-content">
-                <label for="codigo_carrera">Ingrese el código</label>
-                <input type="number" name="codigo_carrera" id="codigo_carrera" class="form-control">
-                <br>
                 <label for="nombre_carrera">Ingrese el nombre</label>
                 <input type="text" name="nombre_carrera" id="nombre_carrera" class="form-control">
                 <br>
@@ -71,6 +68,7 @@
                 <label for="valor_total_carrera">Ingrese el valor total</label>
                 <input type="number" name="valor_total_carrera" id="valor_total_carrera" class="form-control">
                 <br>
+
                 <label for="estado">Ingrese el estado</label>
                 <select name="estado" id="estado" class="form-control">
                   <option value="1">Activo</option>
@@ -78,8 +76,9 @@
                 </select>
               </div>
               <div class="modal-footer">
-                <input type="hidden" name="operacion" id="operacion">
-                <input type="submit" name="action" id="action" class="btn btn-success" value="Ingresar">
+                <input type="hidden" name="codigo_carrera" id="codigo_carrera">
+                <input  type="hidden" name="operacion" id="operacion">
+                <input type="submit" name="action" id="action" class="btn btn-success" value="Crear">
               </div>
             </form>
           </div>
@@ -102,11 +101,11 @@
         "serverSide": true,
         "order": [],
         "ajax": {
-          url: "obtener_registros.php", // Cambia el nombre del archivo PHP que obtiene los registros de la base de datos
+          url: "obtener_registros.php",
           type: "POST"
         },
         "columnDefs": [{
-          "targets": [5, 6], // Índices de las columnas de acciones (editar y borrar)
+          "targets": [5, 6],
           "orderable": false,
         }]
       });
