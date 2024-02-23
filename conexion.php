@@ -9,6 +9,4 @@ $usuario, $password);
 
 
 
-
-
 ?>
