@@ -44,7 +44,7 @@ foreach($resultado as $fila){
     $sub_array[] = '<button type="button" name="borrar" id="'.$fila["codigo_carrera"].'" class="btn btn warning
     btn-xs borrar">Borrar</button>';
 
-    $datos = $sub_array;
+    $datos[] = $sub_array;
 
 }
 

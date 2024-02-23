@@ -24,7 +24,6 @@
       </div>
     </div>
     <br>
-    <br>
     <div class="tabla-responsive">
       <table id="carreras" class="table table-bordered table-striped">
         <thead>
@@ -68,8 +67,8 @@
               </div>
               <div class="modal-footer">
                 <input type="hidden" name="codigo_carrera" id="codigo_carrera">
-                <input  type="hidden" name="operacion" id="operacion">
-                <input type="submit" name="action" id="action" class="btn btn-success" value="Crear">
+                <input  type="hidden" name="operacion" id="action" data-operacion="crear">
+                <input type="submit" name="action" id="action" class="btn btn-success" value="Crear" data-operacion="crear">
               </div>
             </form>
           </div>
@@ -98,34 +97,33 @@
         });
       });
       
-       $(document).on('submit', '#formulario', function(event) {
-         event.preventDefault();
-          var nom_carrera = $("#nombre_carrera").val();
-          var descri_carrera = $("#descripcion_carrera").val();
-          var val_total = $("#valor_total").val();
-          var status = $("#estado").val();
+      $(document).on('submit', '#formulario', function(event) {
+    event.preventDefault();
+    var nom_carrera = $("#nombre_carrera").val();
+    var descri_carrera = $("#descripcion_carrera").val();
+    var val_total = $("#valor_total_carrera").val();
+    var status = $("#estado").val();
+    var operacion = $("#action").data("crear");
 
-          if(nom_carrera != '' && descri_carrera != '' && val_total != '' && status != ''){
-         $.ajax({
-           url: "crear.php",
-           method: "POST",
-           data:new FormData(this),
-           processData:false,
-           success:function(data) 
-           {
 
-              alert(data);
-              $('#formulario')[0].reset();
-              $('#modalCarrera')[0].modal.hide();
-              dataTable.ajax.reload();
-           }
-         });
-        }else {
+    if (nom_carrera != '' && descri_carrera != '' && val_total != '' && status != '') {
+        $.ajax({
+            url: "crear.php",
+            method: "POST",
+            data: new FormData(this),
+            processData: false,
+            success: function(data) {
+                alert(data);
+                $('#formulario')[0].reset();
+                $('#modalCarrera').modal('hide');
+                $('#carreras').DataTable().ajax.reload();
+            }
+        });
+    } else {
+        alert("Algunos campos son obligatorios");
+    }
+});
 
-          alert("Algunos campos son obligatorios");
-
-        }
-     });
     </script>
   </body>
 </html>
