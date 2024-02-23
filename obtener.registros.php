@@ -26,17 +26,46 @@ if($_POST['length'] != -1){
 }
 
 
+$stmt = $conexion->prepare($query);
+$stmt->execute();
+$resultado = $stmt->fetchAll();
+$datos = array();
+$filtered_rows = $stmt->rowCount();
+foreach($resultado as $fila){
+
+    $sub_array = array();
+    $sub_array[] = $fila["codigo_carrera"];
+    $sub_array[] = $fila["nombre_carrera"];
+    $sub_array[] = $fila["descripcion_carrera"];
+    $sub_array[] = $fila["valor_total"];
+    $sub_array[] = $fila["estado"];
+    $sub_array[] = '<button type="button" name="editar" id="'.$fila["codigo_carrera"].'" class="btn btn warning
+    btn-xs editar">Editar</button>';
+    $sub_array[] = '<button type="button" name="borrar" id="'.$fila["codigo_carrera"].'" class="btn btn warning
+    btn-xs borrar">Borrar</button>';
+
+    $datos[] = $sub_array;
+
+}
 
 
+$salida = array (
 
+    "draw"            => intval($_POST["draw"]),
+    "recordsTotal"    => $filtered_rows,
+    "recordsFiltered" => obtener_todos_registros(),
+    "data"            => $datos
 
+);
 
-
-
-
-
-
-
-
+echo json_encode($salida);
 
 ?>
+
+
+
+
+
+
+
+
